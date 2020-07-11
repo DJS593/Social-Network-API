@@ -40,9 +40,9 @@ const UserSchema = new Schema(
   }
 );
 
-// get total count of comments and replies on retrieval
+// get total count of friends
 UserSchema.virtual('friendCount').get(function() {
-  return this.user.friends.length;
+  //return this.user.friends.length;
   
   //comments.reduce((total, comment) => total + comment.replies.length + 1, 0);
 });
