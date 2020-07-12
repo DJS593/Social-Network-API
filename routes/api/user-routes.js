@@ -1,4 +1,6 @@
 const router = require('express').Router();
+
+// controller functions defined in user-controller.js
 const {
   getAllUsers,
   getUserById,
@@ -6,7 +8,7 @@ const {
   updateUser,
   deleteUser,
   addFriend,
-  removeFriend
+  removeFriend 
 } = require('../../controllers/user-controllers');
 
 

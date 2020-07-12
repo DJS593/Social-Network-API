@@ -15,7 +15,7 @@ const UserSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      match: [/.+@.+\..+/],  // double check / should I use the regex from last weekedn
+      match: [/.+\@.+\..+/],  // double check / should I use the regex from last weekedn
     },
     thoughts: [
       { // not sure what to do here
@@ -39,12 +39,12 @@ const UserSchema = new Schema(
   }
 );
 
-// get total count of friends
+// total count of friends
 UserSchema.virtual('friendCount').get(function() {
   return this.friends.length;
 });
 
-// get total count of thoughts
+// total count of thoughts
 UserSchema.virtual('thoughtCount').get(function() {
   return this.thoughts.reduce((total, thought) =>
   total + thought.reactions.length + 1, 0);

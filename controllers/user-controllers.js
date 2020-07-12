@@ -1,12 +1,16 @@
 const { User } = require('../models');
 
+// controller for User
 const userController = {
   // get all users
   getAllUsers(req, res) {
     User.find({})
       .populate({
         path: 'thoughts',
-        path: 'friends',  // do i need to bring in firends here
+        select: '-__v'
+      })
+      .populate({
+        path: 'friends',
         select: '-__v'
       })
       .select('-__v')
@@ -14,7 +18,7 @@ const userController = {
       .then(dbUserData => res.json(dbUserData))
       .catch(err => {
         console.log(err);
-        res.status(400).json(err);
+        res.status(500).json(err);
       });
   },
 
@@ -23,7 +27,10 @@ const userController = {
     User.findOne({ _id: params.id })
       .populate({
         path: 'thoughts',
-        path: 'friends', // check
+        select: '-__v'
+      })
+      .populate({
+        path: 'friends',
         select: '-__v'
       })
       .select('-__v')
@@ -78,14 +85,14 @@ const userController = {
 
   // add a friend
   addFriend({ params }, res) {
-    User.findByIdAndUpdate(
+    User.findOneAndUpdate(
       { _id: params.id },
       { $push: { friends: params.friendId }},
       { new: true, runValidators: true }
     )
       .populate({ 
         path: 'friends',
-        select: '_id'
+        select: ('-__v')
       })
       .select('-__v')
       .then(dbUserData => {
@@ -103,14 +110,14 @@ const userController = {
 
   // remove a friend
   removeFriend({ params }, res) {
-    User.findByIdAndUpdate(
+    User.findOneAndUpdate(
       { _id: params.id },
-      { $pull: { friends: params.frindsId }},
+      { $pull: { friends: params.friendsId }},
       { new: true, runValidators: true}
     )
       .populate({
         path: 'friends',
-        select: '_id'
+        select: ('-__v')
       })
       .select('-__v')
       .then(dbUserData => {
@@ -128,4 +135,5 @@ const userController = {
 
 }
 
+// exporting controller
 module.exports = userController;
