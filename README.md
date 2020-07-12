@@ -35,7 +35,7 @@
   Email stadj099@yahoo.com with any additional questions. 
  
   ## Video Link<a name="video"></a>
-  ADD NEW LINK
+  https://drive.google.com/file/d/10ipKsmkZcM7515e5qB1zuGxf9RBdhMdX/view
   
   ## Social-Network-API Example<a name="example"></a>
   # Command Line Interface
