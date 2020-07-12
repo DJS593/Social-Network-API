@@ -48,7 +48,6 @@ const userController = {
       });
   },
 
-
   // create User
   createUser({ body }, res) {
     console.log('here is the body', body)

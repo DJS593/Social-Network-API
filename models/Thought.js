@@ -1,7 +1,7 @@
 const { Schema, model, Types } = require('mongoose');
 const moment = require('moment');
 
-
+// sub-document
 const ReactionSchema = new Schema(
   {
     reactionId: {

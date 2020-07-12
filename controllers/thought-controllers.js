@@ -70,8 +70,6 @@ updateThought({ params, body }, res) {
     .catch(err => res.status(400).json(err));
 },
 
-
-
 // create a reaction
 addReaction({ params, body }, res) {
   Thought.findOneAndUpdate(
@@ -127,5 +125,5 @@ addReaction({ params, body }, res) {
 };
 
 
-// Exporting controller
+// exporting controller
 module.exports = thoughtController;

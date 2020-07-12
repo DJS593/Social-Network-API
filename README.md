@@ -2,7 +2,7 @@
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
   ## Description 
-  Social Network API is the back-end of a "to be determined" social networking site.  There are Users and Thoughts with respective collections in the database.  In addition, a User can add friends and make reactions to Thoughts.   
+  Social Network API is the back-end of a "to be determined" social networking site.  There are two model, Users and Thoughts with respective collections in the database.  In addition, a User can add friends and make reactions to Thoughts.  A user can be created, deleted, changed and searched for by either ID or "all users".  Thoughts can be created by a user, deleted, adjusted and are searchable by either ID or "all thoughts."  Friends can be created and deleted from the friends array.  Reactions can be created or deleted in the reaction array.   
   
   ## Table of Contents
   * [Installation](#installation)
