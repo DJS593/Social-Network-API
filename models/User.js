@@ -1,11 +1,10 @@
 const { Schema, model } = require('mongoose');
-//const { moveMessagePortToContext } = require('worker_threads');
 const moment = require('moment');
 
 
 const UserSchema = new Schema(
   {
-    userName: {
+    username: {
       type: String,
       unique: true,
       required: true,
@@ -16,7 +15,7 @@ const UserSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      match: [/.+@.+\..+/],  // double check
+      match: [/.+@.+\..+/],  // double check / should I use the regex from last weekedn
     },
     thoughts: [
       { // not sure what to do here
@@ -34,7 +33,7 @@ const UserSchema = new Schema(
   {
     toJSON: {
       virtuals: true,
-      getters: true
+      getters: true // check
     },
     id: false
   }
@@ -42,9 +41,13 @@ const UserSchema = new Schema(
 
 // get total count of friends
 UserSchema.virtual('friendCount').get(function() {
-  //return this.user.friends.length;
-  
-  //comments.reduce((total, comment) => total + comment.replies.length + 1, 0);
+  return this.friends.length;
+});
+
+// get total count of thoughts
+UserSchema.virtual('thoughtCount').get(function() {
+  return this.thoughts.reduce((total, thought) =>
+  total + thought.reactions.length + 1, 0);
 });
 
 // create the User model using the UserSchema
