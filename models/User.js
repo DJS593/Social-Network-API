@@ -8,23 +8,22 @@ const UserSchema = new Schema(
       type: String,
       unique: true,
       required: true,
-      // could leave message `required: 'need a username',`
       trim: true
     },
     email: {
       type: String,
       required: true,
       unique: true,
-      match: [/.+\@.+\..+/],  // double check / should I use the regex from last weekedn
+      match: [/.+\@.+\..+/]
     },
     thoughts: [
-      { // not sure what to do here
+      { 
         type: Schema.Types.ObjectId,
         ref: 'Thought'
       }
     ],
     friends: [
-      { // not sure what to do for _id
+      { 
         type: Schema.Types.ObjectId,
         ref: 'User'
       }
@@ -33,7 +32,7 @@ const UserSchema = new Schema(
   {
     toJSON: {
       virtuals: true,
-      getters: true // check
+      getters: true
     },
     id: false
   }
@@ -45,10 +44,10 @@ UserSchema.virtual('friendCount').get(function() {
 });
 
 // total count of thoughts
-UserSchema.virtual('thoughtCount').get(function() {
-  return this.thoughts.reduce((total, thought) =>
-  total + thought.reactions.length + 1, 0);
-});
+// UserSchema.virtual('thoughtCount').get(function() {
+//   return this.thoughts.reduce((total, thought) =>
+//   total + thought.reactions.length + 1, 0);
+// });
 
 // create the User model using the UserSchema
 const User = model('User', UserSchema);

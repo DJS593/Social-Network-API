@@ -1,10 +1,9 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 const moment = require('moment');
 
 
 const ReactionSchema = new Schema(
   {
-    // set custom id to avoid confusion with parent comment's _id field
     reactionId: {
       type: Schema.Types.ObjectId,
       default: () => new Types.ObjectId()
@@ -12,12 +11,12 @@ const ReactionSchema = new Schema(
     reactionBody: {
       type: String,
       required: true,
-      max: 280,
-      trim: true
+      maxlength: 280
     },
     username: {
       type: String,
-      required: true
+      required: true,
+      trim: true
     },
     createdAt: {
       type: Date,
@@ -40,9 +39,8 @@ const ThoughtSchema = new Schema(
     thoughtText: {
       type: String,
       required: true,
-      // could leave message `required: 'need a username',`
-      min: [1 , 'Thoughts must be between 1 and 280 characters!'],
-      max: 280
+      maxlength: 280,
+      minlength: 1
     },
     createdAt: {
       type: Date,
