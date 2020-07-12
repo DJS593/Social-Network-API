@@ -75,7 +75,7 @@ updateThought({ params, body }, res) {
 // create a reaction
 addReaction({ params, body }, res) {
   Thought.findOneAndUpdate(
-    { _id: params.thoughtId },
+    { _id: params.id },
     { $push: { reactions: body }},
     { new: true, runValidators: true }
   )
@@ -85,6 +85,7 @@ addReaction({ params, body }, res) {
   })
   .select('-__v')
   .then(dbReactionData => {
+    console.log('reaction data', dbReactionData)
     if (!dbReactionData) {
       res.status(404).json({ message: 'No thought found with this id!' });
       return;
@@ -110,7 +111,7 @@ addReaction({ params, body }, res) {
   // remove reaction
   deleteReaction({ params, body }, res) {
     Thought.findByIdAndUpdate(
-      { _id: params.thoughtId },
+      { _id: params.id },
       { $pull: { reactions: { reactionId: params.reactionId }}},
       { new: true, runValidators: true }
     )

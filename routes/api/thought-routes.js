@@ -16,7 +16,6 @@ const {
 router
   .route('/')
   .get(getAllThought)
-  .post(addThought)
 
 // /api/thoughts/:id
 router
@@ -25,6 +24,11 @@ router
   .put(updateThought)
   .delete(removeThought)
 
+// /api/thoughts/<userId>
+router
+  .route('/:userId')
+  .post(addThought);
+  
 // /api/thoughts/<thoughtsId>/<reactionsId>
 router
   .route('/:id/:reactions')
